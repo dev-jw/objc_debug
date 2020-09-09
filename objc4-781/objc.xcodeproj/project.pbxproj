@@ -51,6 +51,7 @@
 		6D8C63582505FEB1004C8295 /* objc-shared-cache.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D8C63492505FEB1004C8295 /* objc-shared-cache.h */; };
 		6D8C63592505FEB1004C8295 /* dyld_priv.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D8C634B2505FEB1004C8295 /* dyld_priv.h */; };
 		6D8C6361250603CD004C8295 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D8C6360250603CD004C8295 /* main.m */; };
+		6D9BBAF82507338B00436B8E /* libobjc.A.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D2AAC0630554660B00DB518D /* libobjc.A.dylib */; };
 		6E1475EA21DFDB1B001357EA /* llvm-AlignOf.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E1475E521DFDB1A001357EA /* llvm-AlignOf.h */; };
 		6E1475EB21DFDB1B001357EA /* llvm-DenseMap.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E1475E621DFDB1B001357EA /* llvm-DenseMap.h */; };
 		6E1475EC21DFDB1B001357EA /* llvm-DenseMapInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E1475E721DFDB1B001357EA /* llvm-DenseMapInfo.h */; };
@@ -149,6 +150,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		6D9BBAF62507338600436B8E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC0620554660B00DB518D;
+			remoteInfo = objc;
+		};
 		837F67AC1A771F6E004D34FA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
@@ -308,6 +316,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D9BBAF82507338B00436B8E /* libobjc.A.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -699,6 +708,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				6D9BBAF72507338600436B8E /* PBXTargetDependency */,
 			);
 			name = ObjcTest;
 			productName = ObjcTest;
@@ -910,6 +920,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		6D9BBAF72507338600436B8E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D2AAC0620554660B00DB518D /* objc */;
+			targetProxy = 6D9BBAF62507338600436B8E /* PBXContainerItemProxy */;
+		};
 		837F67AD1A771F6E004D34FA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = D2AAC0620554660B00DB518D /* objc */;
