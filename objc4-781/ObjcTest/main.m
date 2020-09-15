@@ -10,14 +10,14 @@
 #import <malloc/malloc.h>
 
 @interface Person : NSObject
-//@property (nonatomic, strong) NSString *name;
-//@property (nonatomic, strong) NSString *nickName;
-//
-//@property (nonatomic, assign) char a;
-//@property (nonatomic, assign) char b;
-//
-//@property (nonatomic, assign) int age;
-//@property (nonatomic, assign) int height;
+@property (nonatomic, copy) NSString *name;
+@property (nonatomic, copy) NSString *nickName;
+
+@property (nonatomic, assign) int age;
+@property (nonatomic, assign) long height;
+
+@property (nonatomic) char c1;
+@property (nonatomic) char c2;
 
 @end
 
@@ -25,38 +25,73 @@
 
 @end
 
-struct Year {
-    int year;
-}Year;
+struct SimaplePerson {
+    int idCard;
+    double age;
+    bool sex;
+}SimaplePerson;
 
-struct YearWithMonth {
-    int year;
-    int month;
-}YearWithMonth;
+struct PersonBaseInfo {
+    double height;
+    double weight;
+}PersonBaseInfo;
 
+
+struct Struct1 {
+    char ch:   1;  //1位
+    int  size: 3;  //3位
+} Struct1;
+
+struct Struct2 {
+    char ch;    //1位
+    int  size;  //4位
+} Struct2;
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
         // insert code here...
         
-        NSObject *obj = [NSObject alloc];
-//
-        Person *person = [Person alloc];
-        size_t pSize = sizeof(person);
-        size_t gSize  = class_getInstanceSize(Person.class);
-        size_t mSize = malloc_size((__bridge const void *)(person));
         
-        struct Year y;
-        y.year = 2020;
+        BOOL res1 = [(id)[NSObject class] isKindOfClass:[NSObject class]];
+        BOOL res2 = [(id)[NSObject class] isMemberOfClass:[NSObject class]];
+        BOOL res3 = [(id)[Person class] isKindOfClass:[Person class]];
+        BOOL res4 = [(id)[Person class] isMemberOfClass:[Person class]];
+
+        NSLog(@"%d %d %d %d", res1, res2, res3, res4);
+        
+        
+        
+        NSLog(@"Struct:%lu——BitArea:%lu", sizeof(Struct1), sizeof(Struct2));
+
+        Person *obj = [Person alloc];
+        obj.name      = @"Zsy";
+        obj.nickName  = @"dev";
+        obj.age       = 18;
+        obj.c1        = 'a';
+        obj.c2        = 'b';
+        
+        size_t pSize = sizeof(obj);
+        size_t gSize  = class_getInstanceSize(Person.class);
+        size_t mSize = malloc_size((__bridge const void *)(obj));
+        
+        NSLog(@"class_getInstanceSize = %zd", gSize);
+        NSLog(@"malloc_size = %zd", mSize);
+        NSLog(@"sizeOf = %zd", pSize);
+        
+        struct SimaplePerson y;
+        y.age = 20;
         size_t yearSize = sizeof(y);
         
-        struct YearWithMonth ym;
-        ym.year  = 2020;
-        ym.month = 9;
+        struct PersonBaseInfo ym;
+        ym.weight  = 120;
+        ym.height = 180;
         size_t yearWithMonthSize = sizeof(ym);
         
+        NSLog(@"y: %lu %lu", yearSize, sizeof(SimaplePerson));
+        NSLog(@"ym: %lu", yearWithMonthSize);
+        
         NSLog(@"Hello, World!");
-
+        
     }
     return 0;
 }
