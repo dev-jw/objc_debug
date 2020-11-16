@@ -11,14 +11,14 @@
 #import <objc/message.h>
 
 @interface Person : NSObject
-//@property (nonatomic, strong) NSString *name;
-//@property (nonatomic, strong) NSString *nickName;
-//
-//@property (nonatomic, assign) char a;
-//@property (nonatomic, assign) char b;
-//
-//@property (nonatomic, assign) int age;
-//@property (nonatomic, assign) int height;
+@property (nonatomic, copy) NSString *name;
+@property (nonatomic, copy) NSString *nickName;
+
+@property (nonatomic, assign) int age;
+@property (nonatomic, assign) long height;
+
+@property (nonatomic) char c1;
+@property (nonatomic) char c2;
 
 - (void)doFirst;
 - (void)doSecond;
@@ -43,14 +43,26 @@
 
 @end
 
-struct Year {
-    int year;
-}Year;
+struct SimaplePerson {
+    int idCard;
+    double age;
+    bool sex;
+}SimaplePerson;
 
-struct YearWithMonth {
-    int year;
-    int month;
-}YearWithMonth;
+struct PersonBaseInfo {
+    double height;
+    double weight;
+}PersonBaseInfo;
+
+struct Struct1 {
+    char ch:   1;  //1位
+    int  size: 3;  //3位
+} Struct1;
+
+struct Struct2 {
+    char ch;    //1位
+    int  size;  //4位
+} Struct2;
 
 void validClass() {
     Class class1 = [Person class];
@@ -59,12 +71,15 @@ void validClass() {
     NSLog(@"\n%p\n%p\n%p\n",class1,class2,class3);
 }
 
+<<<<<<< HEAD
 
 //- (NSException *)uncaughtExceptionHandler() {
 //
 //}
 
 
+=======
+>>>>>>> dc6b8fc2d6141f8008d8049edacd75df10c1cfae
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
         // insert code here...
@@ -80,21 +95,33 @@ int main(int argc, const char * argv[]) {
         BOOL res2 = [(id)[NSObject class] isMemberOfClass:[NSObject class]];
         BOOL res3 = [(id)[Person class] isKindOfClass:[Person class]];
         BOOL res4 = [(id)[Person class] isMemberOfClass:[Person class]];
-
+        
         NSLog(@"%d %d %d %d", res1, res2, res3, res4);
         
         BOOL res5 = [(id)[NSObject alloc] isKindOfClass:[NSObject class]];
         BOOL res6 = [(id)[NSObject alloc] isMemberOfClass:[NSObject class]];
         BOOL res7 = [(id)[Person alloc] isKindOfClass:[Person class]];
         BOOL res8 = [(id)[Person alloc] isMemberOfClass:[Person class]];
-
+        
         NSLog(@"%d %d %d %d", res5, res6, res7, res8);
+        
+        NSLog(@"Struct:%lu——BitArea:%lu", sizeof(Struct1), sizeof(Struct2));
+        
+        Person *obj = [Person alloc];
+        obj.name      = @"Zsy";
+        obj.nickName  = @"dev";
+        obj.age       = 18;
+        obj.c1        = 'a';
+        obj.c2        = 'b';
+
         
         validClass();
         
-        NSObject *obj = [NSObject alloc];
-        //
+        
+        // NSObject *obj = [NSObject alloc];
+        
         Person *person = [Person alloc];
+<<<<<<< HEAD
         [person run];
 //        size_t pSize = sizeof(person);
 //        size_t gSize  = class_getInstanceSize(Person.class);
@@ -106,12 +133,26 @@ int main(int argc, const char * argv[]) {
         
         struct Year y;
         y.year = 2020;
+=======
+        size_t pSize = sizeof(person);
+        size_t gSize  = class_getInstanceSize(Person.class);
+        size_t mSize = malloc_size((__bridge const void *)(obj));
+        NSLog(@"class_getInstanceSize = %zd", gSize);
+        NSLog(@"malloc_size = %zd", mSize);
+        NSLog(@"sizeOf = %zd", pSize);
+        
+        struct SimaplePerson y;
+        y.age = 20;
+>>>>>>> dc6b8fc2d6141f8008d8049edacd75df10c1cfae
         size_t yearSize = sizeof(y);
         
-        struct YearWithMonth ym;
-        ym.year  = 2020;
-        ym.month = 9;
+        struct PersonBaseInfo ym;
+        ym.weight  = 120;
+        ym.height = 180;
         size_t yearWithMonthSize = sizeof(ym);
+        
+        NSLog(@"y: %lu %lu", yearSize, sizeof(SimaplePerson));
+        NSLog(@"ym: %lu", yearWithMonthSize);
         
         NSLog(@"Hello, World!");
         
