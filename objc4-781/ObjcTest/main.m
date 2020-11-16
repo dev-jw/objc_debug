@@ -8,6 +8,7 @@
 #import <Foundation/Foundation.h>
 #import <objc/runtime.h>
 #import <malloc/malloc.h>
+#import <objc/message.h>
 
 @interface Person : NSObject
 //@property (nonatomic, strong) NSString *name;
@@ -19,9 +20,26 @@
 //@property (nonatomic, assign) int age;
 //@property (nonatomic, assign) int height;
 
+- (void)doFirst;
+- (void)doSecond;
+- (void)doThird;
+
+- (void)run;
+
+
 @end
 
 @implementation Person
++ (void)load {
+    
+}
+//- (void)run {
+//    NSLog(@"%s", __func__);
+//}
+
+- (void)doFirst {}
+- (void)doSecond {}
+- (void)doThird {}
 
 @end
 
@@ -42,9 +60,21 @@ void validClass() {
 }
 
 
+//- (NSException *)uncaughtExceptionHandler() {
+//
+//}
+
+
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
         // insert code here...
+        
+//        NSSetUncaughtExceptionHandler(&)
+        
+         [Person init];
+        
+        Person *p = [Person alloc];
+        [p run];
         
         BOOL res1 = [(id)[NSObject class] isKindOfClass:[NSObject class]];
         BOOL res2 = [(id)[NSObject class] isMemberOfClass:[NSObject class]];
@@ -65,11 +95,14 @@ int main(int argc, const char * argv[]) {
         NSObject *obj = [NSObject alloc];
         //
         Person *person = [Person alloc];
-        size_t pSize = sizeof(person);
-        size_t gSize  = class_getInstanceSize(Person.class);
-        size_t mSize = malloc_size((__bridge const void *)(person));
-        
-        
+        [person run];
+//        size_t pSize = sizeof(person);
+//        size_t gSize  = class_getInstanceSize(Person.class);
+//        size_t mSize = malloc_size((__bridge const void *)(person));
+//
+//        objc_msgSend(person, sel_registerName("run"));
+                
+//        objc_msgSendSuper(<#struct objc_super * _Nonnull super#>, <#SEL  _Nonnull op, ...#>)
         
         struct Year y;
         y.year = 2020;

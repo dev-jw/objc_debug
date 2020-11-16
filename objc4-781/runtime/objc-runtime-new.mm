@@ -2495,6 +2495,11 @@ static Class realizeClassWithoutSwift(Class cls, Class previously)
 
     // fixme verify class is not in an un-dlopened part of the shared cache?
 
+    const char * name = "Person";
+    if (strcmp(cls->mangledName(), name) == 0) {
+        printf("ok");
+    }
+    
     auto ro = (const class_ro_t *)cls->data();
     auto isMeta = ro->flags & RO_META;
     if (ro->flags & RO_FUTURE) {
